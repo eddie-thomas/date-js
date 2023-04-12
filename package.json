@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/eddie-thomas/date-js/issues"
   },
-  "homepage": "https://github.com/eddie-thomas/date-js#readme"
+  "homepage": "https://github.com/eddie-thomas/date-js#readme",
+  "dependencies": {
+    "typescript": "^5.0.4"
+  }
 }
