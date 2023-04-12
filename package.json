@@ -1,0 +1,27 @@
+{
+  "name": "date-ext-js",
+  "version": "0.0.1",
+  "description": "An extention of the JavaScript Date object.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eddie-thomas/date-js.git"
+  },
+  "keywords": [
+    "date",
+    "date",
+    "parsing",
+    "datetime",
+    "timezone",
+    "locale"
+  ],
+  "author": "Edward Thomas",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/eddie-thomas/date-js/issues"
+  },
+  "homepage": "https://github.com/eddie-thomas/date-js#readme"
+}
