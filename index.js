@@ -1,3 +1,3 @@
-const { DateExt } = require("./lib/date-ext");
+const { DateExt } = require("./dist/date-ext");
 
 exports.DateExt = DateExt;
