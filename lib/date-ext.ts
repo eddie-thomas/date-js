@@ -1,4 +1,10 @@
-import { DATE_TIME_FORMAT_RE, padEnd, padStart } from "./utils";
+import {
+  DATE_TIME_FORMAT_RE,
+  padEnd,
+  padStart,
+  type Timezone,
+  TIMEZONES,
+} from "./utils";
 
 // -- Utility code added to the Number object ----
 declare global {
@@ -60,19 +66,17 @@ class DateExt {
    */
   static #parseISOTimezone(timezone: string): number {
     const matches = timezone.match(
-      /^(?<dir>[-\+])(?<hr>([0-1][0-9]|[2][0-4])):(?<min>[0-5][0-9])$/
+      /^(?<dir>[-\+])(?<hr>([0-1][0-9]|[2][0-4]))(:(?<min>[0-5][0-9])|)$/
     );
 
     try {
       const { dir, hr, min } = matches?.groups || {};
-      if (!(dir && hr && min))
+      if (!(dir && hr))
         throw Error("Not all of the timezone offset was provided!");
 
-      /** Have to use the opposite because that shits backwards */
-      const oppositeDir = dir === "-" ? "+" : "-";
       const timezoneMilliseconds = parseInt(
-        `${oppositeDir}${
-          (parseInt(hr, 10) * 60 + parseInt(min, 10)) * 60 * 1000
+        `${dir}${
+          (parseInt(hr, 10) * 60 + parseInt(min ?? "0", 10)) * 60 * 1000
         }`,
         10
       );
@@ -122,6 +126,13 @@ class DateExt {
     this.#originISOString = isoString;
     // Set milliseconds of offset
     this.#timezoneOffsetMilliseconds = timezoneMilliseconds;
+  }
+
+  getTimezones(): Array<Timezone> {
+    return TIMEZONES.filter((tz) => {
+      const tz_ms = DateExt.#parseISOTimezone(tz.offset);
+      return tz_ms === this.#timezoneOffsetMilliseconds;
+    });
   }
 
   /**
